@@ -1,0 +1,34 @@
+{
+  "name": "fullstack-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready full-stack monorepo starter: Next.js + Express API + PostgreSQL + Prisma + TypeScript",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter '!database' dev",
+    "build": "pnpm --filter database build && pnpm --parallel --filter '!database' build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r exec rm -rf dist .next node_modules/.cache",
+    "db:generate": "pnpm --filter database db:generate",
+    "db:migrate": "pnpm --filter database db:migrate",
+    "db:seed": "pnpm --filter database db:seed",
+    "db:studio": "pnpm --filter database db:studio",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:build": "docker compose up --build"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
