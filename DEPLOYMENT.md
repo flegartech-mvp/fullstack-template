@@ -28,8 +28,8 @@ pnpm monorepo:
 
 ## Migrations
 No `migrations/` dir yet (dev uses `db push`). For production:
-1. `pnpm --filter database exec prisma migrate dev --name init` (once; commit `prisma/migrations/`).
-2. In production run **`prisma migrate deploy`** (never `db push`/`migrate dev`).
+1. Once, **against a local/disposable development PostgreSQL** (never production): `pnpm --filter database exec prisma migrate dev --name init`; commit `prisma/migrations/`.
+2. In production run **`prisma migrate deploy`** only — never `db push`/`migrate dev` against production.
 > `binaryTargets` include `debian-openssl-3.0.x`/`-1.1.x` so the engine resolves in Docker.
 
 ## Docker Compose (VPS / single-host)
