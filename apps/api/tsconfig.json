@@ -4,7 +4,17 @@
     "rootDir": "src",
     "outDir": "dist",
     "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    // Executable app, not a library: no .d.ts emit. Also avoids the pnpm
+    // TS2742 "inferred type cannot be named" error on exported Express routers.
+    "declaration": false,
+    "declarationMap": false,
+    "composite": false,
+    // Prisma's generated inputs use `field?: T | null` (not `| undefined`), which
+    // is fundamentally incompatible with exactOptionalPropertyTypes for create/
+    // update calls. Disable it here (keep it on for the web app). noUncheckedIndexedAccess
+    // stays on, so req.params access is still guarded.
+    "exactOptionalPropertyTypes": false
   },
   "include": ["src"]
 }
