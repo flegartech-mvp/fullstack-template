@@ -37,3 +37,13 @@ playwright-report/
 
 # build artifacts
 *.tsbuildinfo
+
+# --- repo cleanup hygiene (added) ---
+.vite/
+.cache/
+output/
+tmp/
+*.swp
+*.bak
+*.orig
+promo/
