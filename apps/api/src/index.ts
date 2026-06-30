@@ -1,34 +1,19 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import { authRouter } from "./routes/auth.js";
-import { postsRouter } from "./routes/posts.js";
-import { errorHandler } from "./middleware/errorHandler.js";
+import "./env.js";
+import { createApp } from "./app.js";
 
 // Fail fast in production on a missing/placeholder JWT secret.
 if (
   process.env.NODE_ENV === "production" &&
-  (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes("change-me") || process.env.JWT_SECRET.length < 32)
+  (!process.env.JWT_SECRET ||
+    process.env.JWT_SECRET.includes("change-me") ||
+    process.env.JWT_SECRET.length < 32)
 ) {
   console.error("JWT_SECRET must be a strong (>=32 char) non-default value in production.");
   process.exit(1);
 }
 
-const app = express();
+const app = createApp();
 const PORT = process.env.PORT ?? 8000;
-
-app.use(cors({ origin: process.env.WEB_URL ?? "http://localhost:3000" }));
-app.use(express.json());
-
-// Health check
-app.get("/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
-});
-
-app.use("/api/auth", authRouter);
-app.use("/api/posts", postsRouter);
-
-app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
   console.log(`🚀 API running at http://localhost:${PORT}`);

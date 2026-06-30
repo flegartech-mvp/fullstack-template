@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:seed": "tsx src/seed.ts",
-    "db:studio": "prisma studio",
+    "db:migrate": "dotenv -e ../../.env -- prisma migrate dev",
+    "db:deploy": "dotenv -e ../../.env -- prisma migrate deploy",
+    "db:seed": "dotenv -e ../../.env -- tsx src/seed.ts",
+    "db:studio": "dotenv -e ../../.env -- prisma studio",
     "build": "prisma generate"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "prisma": "^5.15.0",
     "tsx": "^4.7.1",
     "typescript": "^5.4.5",
+    "dotenv-cli": "^7.4.2",
     "@types/node": "^20.0.0",
     "@types/bcryptjs": "^2.4.6"
   }

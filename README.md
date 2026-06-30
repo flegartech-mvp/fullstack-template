@@ -36,8 +36,8 @@ Next.js 15 + Express API + PostgreSQL + Prisma + TypeScript. Clone it, rename it
 # 1. Clone
 git clone <repo-url> my-app && cd my-app
 
-# 2. Configure
-cp .env.example .env.local
+# 2. Configure (root .env is read by the API, Prisma, and Docker Compose)
+cp .env.example .env
 
 # 3. Install
 pnpm install
